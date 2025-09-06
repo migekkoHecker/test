@@ -5,44 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Underground Exchange</title>
   <style>
+    /* Full screen dark background */
     body {
       margin: 0;
       height: 100vh;
-      background: radial-gradient(circle at top, #0b0b0b, #1a1a1a);
-      font-family: 'Segoe UI', sans-serif;
-      color: #f0f0f0;
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      text-align: center;
     }
 
+    /* Container for content */
     .container {
-      text-align: center;
-      padding: 40px;
-      border-radius: 12px;
       background: rgba(0,0,0,0.7);
-      box-shadow: 0 0 20px rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 10px;
+      text-shadow: 0 0 10px #00ff00;
       animation: fadeIn 2s ease-in-out;
     }
 
     h1 {
       font-size: 3rem;
       margin-bottom: 20px;
-      text-shadow: 0 0 15px #ff4d4d;
+      color: #00ff00;
+      text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00;
     }
 
     p {
       font-size: 1.2rem;
       margin-bottom: 30px;
-      line-height: 1.5;
       opacity: 0.8;
     }
 
     button {
-      background: #ff4d4d;
-      color: white;
-      border: none;
+      background: black;
+      color: #00ff00;
+      border: 2px solid #00ff00;
       padding: 15px 30px;
       font-size: 1rem;
       border-radius: 8px;
@@ -53,21 +55,63 @@
     }
 
     button:hover {
-      background: #ff1a1a;
-      box-shadow: 0 0 20px #ff1a1a;
+      background: #00ff00;
+      color: black;
+      box-shadow: 0 0 20px #00ff00;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px);}
       to { opacity: 1; transform: translateY(0);}
     }
+
+    /* Matrix falling code effect */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
+  <canvas id="matrix"></canvas>
+
   <div class="container">
     <h1>Underground Exchange</h1>
-    <p>Whispers become deals. Secrets become currency. Elevator keys, exclusive passes, and hidden privileges await. Everything is under watchful eyes.</p>
-    <a href="login.html"><button>Enter… if you dare</button></a>
+    <p><strong>Warning:</strong> Authorized Ashram College students only.<br>If you are not supposed to be here, leave immediately.</p>
+    <a href="login.html"><button>Login with Google</button></a>
   </div>
+
+  <script>
+    // Matrix falling code effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(0);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px Courier";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        drops[i]++;
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      }
+    }
+
+    setInterval(draw, 50);
+  </script>
 </body>
 </html>
