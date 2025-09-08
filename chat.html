@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BlackBox Chat</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: monospace;
+      background: black;
+      color: #00ff99;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar for profiles */
+    .sidebar {
+      width: 250px;
+      background: #0a0a0a;
+      border-right: 2px solid #00ff99;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .profile {
+      padding: 10px;
+      border-bottom: 1px solid #00ff99;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .profile:hover {
+      background: rgba(0, 255, 153, 0.1);
+    }
+
+    /* Chat section */
+    .chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .chat-bubble {
+      max-width: 60%;
+      margin: 8px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      position: relative;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .chat-bubble.left {
+      background: rgba(0, 255, 153, 0.1);
+      align-self: flex-start;
+    }
+
+    .chat-bubble.right {
+      background: rgba(0, 255, 153, 0.2);
+      align-self: flex-end;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Fake input */
+    .chat-input {
+      margin-top: 15px;
+      border-top: 1px solid #00ff99;
+      padding: 10px;
+      color: #00ff99;
+      opacity: 0.5;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="profile">Neo</div>
+      <div class="profile">Trinity</div>
+      <div class="profile">Morpheus</div>
+      <div class="profile">Agent X</div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat">
+      <div class="chat-bubble left">Welcome to BlackBox.</div>
+      <div class="chat-bubble right">Who invited you?</div>
+      <div class="chat-bubble left">That doesn’t matter. I’m in now.</div>
+      <div class="chat-bubble right">Then prove it.</div>
+      <div class="chat-input">[Type a message...]</div>
+    </div>
+  </div>
+</body>
+</html>
